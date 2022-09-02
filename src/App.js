@@ -16,7 +16,7 @@ const App = () => {
       <NoteState>
         <Router>
           <Navigation />
-          <Alert message="hello boys"/>
+          <Alert message="This Application is under maintainance"/>
           <div className="container">
             <Switch>
               <Route exact path="/">
