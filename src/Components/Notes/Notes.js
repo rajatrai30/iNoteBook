@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import NoteItem from '../NoteItem/NoteItem';
 import contextValue from '../../Context/notes/NoteContext';
 import AddNote from '../AddNote';
@@ -6,23 +6,27 @@ import AddNote from '../AddNote';
 
 const Notes = () => {
     const context = useContext(contextValue);
-    const { notes, getNotes } = context;
+    const { notes, getNotes, editNote} = context;
     const ref = useRef(null);
-    const [note, setNote] = useState({ etitle: "", edescription: "", etag: "" })
+    const refClose = useRef(null);
+
+    const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
 
     useEffect(() => {
         getNotes()
         // eslint-disable-next-line
     }, [])
 
-    const editNote = (currentNote) => {
+    const updateNote = (currentNote) => {
         ref.current.click();
-        setNote({etitle:currentNote.title, edescription:currentNote.description, etag:currentNote.tag})
+        setNote({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
     }
-  
+
     const handleAddClick = (e) => {
         console.log("updated succesfully!!", note)
-        e.preventDefault();
+        editNote(note.id, note.etitle, note.edescription, note.etag)
+        refClose.current.click();
+
     }
 
     const onChange = (e) => {
@@ -60,7 +64,7 @@ const Notes = () => {
                             </form>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="button" className="btn btn-primary" onClick={handleAddClick}>Update Note</button>
                         </div>
                     </div>
@@ -69,7 +73,7 @@ const Notes = () => {
             <div className='row my-3'>
                 <h1>Your Notes</h1>
                 {notes.map((notes) => {
-                    return <NoteItem key={notes._id} editNote={editNote} notes={notes} />
+                    return <NoteItem key={notes._id} updateNote={updateNote} notes={notes} />
                 })}
             </div>
         </>
