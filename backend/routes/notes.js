@@ -31,10 +31,12 @@ router.post('/addnote', fetchuser, [
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const note = new Note({
-            title, description, tag, user: req.user.id
-        })
-        const savedNote = await note.save()
+        // const note = new Note({
+        //     title, description, tag, user: req.user.id
+        // })
+        // const savedNote = await note.save()
+
+        const savedNote = await Note.create({title, description, tag, user: req.user.id})
         res.json(savedNote);
     } catch (error) {
         console.error(error.message);

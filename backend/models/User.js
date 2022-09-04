@@ -6,6 +6,7 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+
     email:{
         type: String,
         required: true,
@@ -21,5 +22,5 @@ const UserSchema = new Schema({
         default: Date.now
     },
 });
-const User = mongoose.model('user', UserSchema);
-module.exports = User;
+const user = mongoose.model('user', UserSchema);
+module.exports = user;
