@@ -50,22 +50,22 @@ const Notes = () => {
                             <form className='container my-3'>
                                 <div className="mb-3">
                                     <label htmlFor="etitle" className="form-label">Title</label>
-                                    <input type="text" className="form-control" id="etitle" name='etitle' value={note.etitle} onChange={onChange} />
+                                    <input type="text" className="form-control" id="etitle" name='etitle' value={note.etitle} onChange={onChange} minLength={5} required/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="edescription" className="form-label">Description</label>
-                                    <input type="text" id="edescription" name="edescription" value={note.edescription} className="form-control" onChange={onChange} />
+                                    <input type="text" id="edescription" name="edescription" value={note.edescription} className="form-control" onChange={onChange} minLength={5} required/>
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="etag" className="form-label">Tag</label>
-                                    <input type="text" id="etag" name="etag" className="form-control" value={note.etag} onChange={onChange} />
+                                    <input type="text" id="etag" name="etag" className="form-control" value={note.etag} onChange={onChange} minLength={5} required/>
                                 </div>
                                 <button type="submit" className="btn btn-primary" onClick={handleAddClick}>Add Note</button>
                             </form>
                         </div>
                         <div className="modal-footer">
                             <button type="button" ref={refClose} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={handleAddClick}>Update Note</button>
+                            <button type="button" disabled={note.etitle.length<5 || note.edescription.length<5} className="btn btn-primary" onClick={handleAddClick}>Update Note</button>
                         </div>
                     </div>
                 </div>
