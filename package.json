@@ -1,6 +1,9 @@
 {
   "name": "csp_redux",
   "version": "0.1.0",
+  "engines": {
+    "node": "18.x"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.4",
